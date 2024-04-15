@@ -5,7 +5,7 @@ Este es un simple descargador de videos de YouTube que convierte los videos desc
 Clona este repositorio en tu máquina local:
 
 ``
-git clone https://github.com/tu_usuario/descargador-youtube-mp3.git
+git clone https://github.com/enriquetecfan11/youtubetomp3.git
 ``
 
 Navega al directorio del proyecto:
