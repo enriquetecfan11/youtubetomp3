@@ -32,7 +32,7 @@ def convertir_a_mp3(video_file, ruta):
 def main(ruta=os.getcwd()):
     mp3_file = None  # Inicializa mp3_file con None fuera del bloque try-except
     # Importa la imagen de la portada que se llama youtubetomp3.png
-    st.image("portadayoutube.jpg", use_column_width=True,)
+    st.image("portadayoutube.jpg", use_column_width=True)
     
     # st.title("De video a MP3")
     st.write("Esta aplicación te permite descargar y convertir videos de YouTube a archivos de audio MP3.")
