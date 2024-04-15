@@ -21,23 +21,22 @@ def convertir_a_mp3(video_file, ruta):
     # Crear el nombre del archivo mp3
     mp3_file = os.path.splitext(video_file)[0] + '.mp3'
     # Guardar el archivo de audio como mp3 en la carpeta music
-    mp3_file_path = os.path.join(ruta, 'music', mp3_file)
+    # mp3_file_path = os.path.join(ruta, 'music', mp3_file)
+    mp3_file_path = os.path.join(ruta, mp3_file)
     audio.export(mp3_file_path, format='mp3')
     # Eliminar el archivo de video
     os.remove(video_file_path)
-    return mp3_file
+    return mp3_file, mp3_file_path
 
 # Función principal de la aplicación
-def main():
+def main(ruta=os.getcwd()):
+    mp3_file = None  # Inicializa mp3_file con None fuera del bloque try-except
     st.title("De video a MP3")
     st.write("Esta aplicación te permite descargar y convertir videos de YouTube a archivos de audio MP3.")
-    st.write("Para poder utilizar esta aplicación, simplemente introduce la URL del video de YouTube en el cuadro de texto y haz clic en el botón 'Descargar y Convertir")
+    st.write("Para poder utilizar esta aplicación, simplemente introduce la URL del video de YouTube en el cuadro de texto y haz clic en el botón 'Descargar y Convertir'")
 
     # Entrada de URL de YouTube
     url = st.text_input("Introduce la URL del video de YouTube:")
-    # OsCreate folder called music
-    if not os.path.exists('music'):
-        os.makedirs('music')
 
     if st.button("Descargar y Convertir"):
         # Validar la URL
@@ -50,13 +49,15 @@ def main():
                 # Descargar el video, meterlo en la carpeta music y obtener su nombre de archivo
                 video_file = descargar_video(url, ruta)
                 # Convertir el video a MP3
-                mp3_file = convertir_a_mp3(video_file, ruta)
+                mp3_file, mp3_file_path = convertir_a_mp3(video_file, ruta)
                 st.success("El video se ha descargado y convertido a MP3 con éxito.")
                 st.audio(mp3_file, format='audio/mp3')
-                st.markdown(f"[Descargar archivo MP3]({mp3_file})")
+                st.write("Para descargar el archivo MP3, haz click en los puntos de del reproductor de audio y selecciona 'Descargar'.")
+                st.write("Recuerda escribe el nombre de archivo que desees y seguido .mp3 para que se descargue correctamente. Ejemplo: 'cancion.mp3'")
+                st.markdown(f"[Descargar archivo MP3]({mp3_file_path})")
             except Exception as e:
                 st.error(f"Ha ocurrido un error: {e}")
-    
+
     st.write("Hecho por Enrique Rodriguez Vela")
 
 if __name__ == "__main__":
